@@ -19,7 +19,7 @@
     <div class="main-container">
         <div class="main-content">
             <h1 class="brand">Fast Fund</h1>
-            <div id="login-box" class="login-box hidden">
+            <div id="login-box" class="login-box ">
                 <form action="/login" method="POST">
                     <input type="text" name="phone_number" placeholder="Username"> <!-- Changed from username to phone_number -->
                     <input type="password" name="password" placeholder="Password">
@@ -40,18 +40,15 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginBtn = document.getElementById('login-btn');
-            const loginBox = document.getElementById('login-box');
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginBtn = document.getElementById('login-btn');
+        const loginForm = document.getElementById('login-form');
 
-            loginBtn.addEventListener('click', function() {
-                if (loginBox.style.display === 'none') {
-                    loginBox.style.display = 'block';
-                } else {
-                    loginBox.style.display = 'none';
-                }
-            });
+        loginBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            loginForm.submit();
         });
-    </script>
+    });
+</script>
 </body>
 </html>

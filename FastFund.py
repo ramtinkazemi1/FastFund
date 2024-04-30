@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Increase the length of the secret key
+app.secret_key = os.urandom(24)
 
 engine = create_engine(os.getenv("DATABASE_URI"))
 Session = sessionmaker(bind=engine)
@@ -34,20 +34,19 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.form['username']
+    phone_number = request.form['phone_number']
     password = request.form['password']
 
-    # if the user exists
-    user = FastFund_db.query(User).filter_by(phone_number=username).first()
+    # check if the user exists
+    user = FastFund_db.query(User).filter_by(phone_number=phone_number).first()
 
     if user and user.check_password(password):
-        # Redirect the user
+        # redirect the user to the dash
         return redirect(url_for('user_dashboard', full_name=user.full_name))
     else:
-        # if failed, render the login page with an error
+        # usr authentication failed
         flash("Invalid username or password. Please try again.", "error")
-        return render_template('index.html')
-
+        return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -57,13 +56,13 @@ def register():
         phone_number = request.form['phone_number']
         password = request.form['password']
 
-        # Check if the user already exists
+        # if the user already exists
         existing_user = FastFund_db.query(User).filter_by(phone_number=phone_number).first()
         if existing_user:
             flash("User already exists. Please try again.", "error")
             return render_template('register.html')
 
-        # If it doesn't
+        # If it doesn't create new user
         new_user = User(
             full_name=full_name,
             email=email,
@@ -78,7 +77,7 @@ def register():
             return redirect(url_for('register'))
 
         flash("Registration successful!", "success")
-        return redirect(url_for('user_dashboard', full_name=full_name))  # Redirect to the user dashboard
+        return redirect(url_for('user_dashboard', full_name=full_name))  # go to the user dashboard
 
     return render_template('register.html')
 
@@ -86,6 +85,7 @@ def register():
 def user_dashboard():
     full_name = request.args.get('full_name')
     return render_template('user_dashboard.html', full_name=full_name)
+
 
 if __name__ == '__main__':
     Base.metadata.create_all(engine)

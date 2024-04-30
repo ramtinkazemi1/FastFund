@@ -11,7 +11,7 @@ body, h1, p, ul, li, a, button {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000; /* Ensure the navbar stays on top of other content */
+    z-index: 1000;
 }
 
 .navbar a {
@@ -26,7 +26,6 @@ body, h1, p, ul, li, a, button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
 }
 
 .main-container {
@@ -51,7 +50,7 @@ body, h1, p, ul, li, a, button {
 
 .login-box {
     margin-top: 20px;
-    display: none;
+    display: block; /* it should be hidden initially */
 }
 .login-box.hidden {
     display: none;
