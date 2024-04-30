@@ -6,6 +6,7 @@
     <title>FastFund</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-center">
@@ -20,34 +21,37 @@
             <h1 class="brand">Fast Fund</h1>
             <div id="login-box" class="login-box hidden">
                 <form action="/login" method="POST">
-                    <input type="text" name="username" placeholder="Username">
+                    <input type="text" name="phone_number" placeholder="Username"> <!-- Changed from username to phone_number -->
                     <input type="password" name="password" placeholder="Password">
-                    <a style="text-decoration: none;" href="{{ url_for('register') }}">New to Fast Fund? Register <span style="color: black;">here!</span></a>
+                    <a href="{{ url_for('register') }}" style="text-decoration: none;">New to Fast Fund? Register <span style="color: black;">here!</span></a>
                     <br>
                 </form>
             </div>
-            <button id="login-btn">Login</button>
+            <button id="login-btn" type="submit">Login</button>
         </div>
     </div>
-    
 
     <footer class="footer">
         <div class="footer-links">
-            <a href="#">Careers</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
+            <a>Careers</a>
+            <a>About Us</a>
+            <a>Contact Us</a>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        const loginBtn = document.getElementById('login-btn');
-        const loginBox = document.getElementById('login-box');
+            const loginBtn = document.getElementById('login-btn');
+            const loginBox = document.getElementById('login-box');
 
-        loginBtn.addEventListener('click', function() {
-        loginBox.style.display = (loginBox.style.display === 'none') ? 'block' : 'none';
+            loginBtn.addEventListener('click', function() {
+                if (loginBox.style.display === 'none') {
+                    loginBox.style.display = 'block';
+                } else {
+                    loginBox.style.display = 'none';
+                }
+            });
         });
-    });
     </script>
 </body>
 </html>
