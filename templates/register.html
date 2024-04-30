@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastFund - Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-center">
+            <a href="/">Home</a>
+            <a href="{{ url_for('about-us') }}">About Us</a>
+            <a href="{{ url_for('contact-us') }}">Contact Us</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="main-content">
+            <h1 class="brand">Fast Fund</h1>
+            <div id="register-box" class="register-box hidden">
+            </div>
+            
+            <button id="register-btn">Register</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Careers</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerBtn = document.getElementById('register-btn');
+            const registerBox = document.getElementById('register-box');
+
+            registerBtn.addEventListener('click', function() {
+                registerBox.style.display = (registerBox.style.display === 'none') ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
